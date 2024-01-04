@@ -1,13 +1,9 @@
 package com.chorume_dashboard.models;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,5 +33,10 @@ public class UserCoinsHistory {
   @Column(name = "description")
   String description;
   @Column(name = "created_at")
-  Date created_at;
+  LocalDateTime created_at;
+
+  @PrePersist
+  public void prePersist() {
+    this.created_at = LocalDateTime.now();
+  }
 }
